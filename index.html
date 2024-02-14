@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ping Pong</title>
     <style>
+        /* Resetando Margens */
         *{
             overflow: hidden;
             margin: 0;
@@ -19,7 +20,6 @@
         const canvasEl = document.querySelector('canvas'), 
         canvasCtx = canvasEl.getContext('2d')
 
-        const linewidth = 15
         const field = {
             w:window.innerWidth,
             h:window.innerHeight,
@@ -49,8 +49,8 @@
             field.draw()
             line.draw()
 
-            canvasCtx.fillRect(10, 400, linewidth, 200)
-            canvasCtx.fillRect(window.innerWidth - linewidth - 10, 120, linewidth, 200)
+            canvasCtx.fillRect(10, 400, line.w, 200)
+            canvasCtx.fillRect(window.innerWidth - line.w - 10, 120, line.w, 200)
             
             canvasCtx.beginPath
             canvasCtx.arc(200,300,20,0,2*Math.PI,false)
