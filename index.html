@@ -18,8 +18,9 @@
     <canvas></canvas>
     <script>
         const canvasEl = document.querySelector('canvas'), 
-        canvasCtx = canvasEl.getContext('2d')
+        canvasCtx = canvasEl.getContext('2d'), gapX = 10
 
+        // Criando Campo (Objeto)
         const field = {
             w:window.innerWidth,
             h:window.innerHeight,
@@ -28,7 +29,7 @@
                 canvasCtx.fillRect(0,0, this.w, this.h)
             }
         }
-
+        // Criando Linha Central (Objeto)
         const line = {
             w:15,
             h:field.h,
@@ -38,6 +39,30 @@
             }
         }
 
+        // Criando Raquetes
+        const leftPaddle = {
+            x: gapX,
+            y: 100,
+            w: line.w,
+            h: 200,
+            draw: function(){
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+            }
+
+        }
+
+        const rightPaddle = {
+            x: field.w - line.w - gapX,
+            y: 120,
+            w: line.w,
+            h: 200,
+            draw : function(){
+                canvasCtx.fillRect( this.x, this.y, this.w, this.h)
+            }
+        }
+
+
+
         function setup (){
             canvasEl.width = canvasCtx.width = field.w
             canvasEl.height = canvasCtx.height = field.h
@@ -45,12 +70,12 @@
             
         }
 
+        // Invocando métodos "draw" para renderização
         function draw(){
             field.draw()
             line.draw()
-
-            canvasCtx.fillRect(10, 400, line.w, 200)
-            canvasCtx.fillRect(window.innerWidth - line.w - 10, 120, line.w, 200)
+            leftPaddle.draw()
+            rightPaddle.draw()
             
             canvasCtx.beginPath
             canvasCtx.arc(200,300,20,0,2*Math.PI,false)
