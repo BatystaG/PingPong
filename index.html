@@ -27,7 +27,7 @@
             draw: function(){
                 canvasCtx.fillStyle = '#808080'
                 canvasCtx.fillRect(0,0, this.w, this.h)
-            }
+            },
         }
         // Criando Linha Central (Objeto)
         const line = {
@@ -35,8 +35,8 @@
             h:field.h,
             draw: function(){
                 canvasCtx.fillStyle = "#000000"
-                canvasCtx.fillRect(field.w / 2 - this.w / 2, 0, 15, this.h)
-            }
+                canvasCtx.fillRect(field.w / 2 - this.w / 2, 0, this.w, this.h)
+            },
         }
 
         // Criando Raquetes
@@ -46,8 +46,9 @@
             w: line.w,
             h: 200,
             draw: function(){
+                canvasCtx.fillStyle ="#000000"
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h)
-            }
+            },
 
         }
 
@@ -57,8 +58,9 @@
             w: line.w,
             h: 200,
             draw : function(){
+                canvasCtx.fillStyle = "#000000"
                 canvasCtx.fillRect( this.x, this.y, this.w, this.h)
-            }
+            },
         }
 
         // Criando a Bola
@@ -66,12 +68,19 @@
             x: 300,
             y: 200,
             r: 20,
+            speed: 5,
+            _move: function(){
+                this.x += 1 * this.speed
+                this.y += 1 * this.speed
+            },
             draw: function(){
             canvasCtx.fillStyle = "#000000"
-            canvasCtx.beginPath
-            canvasCtx.arc(this.y,this.x,this.r,0,2*Math.PI,false)
+            canvasCtx.beginPath()
+            canvasCtx.arc(this.x,this.y,this.r,0,2*Math.PI,false)
             canvasCtx.fill()
-            }
+
+            this._move()
+            },
         }
 
         // Criando o Placar
@@ -83,9 +92,9 @@
             canvasCtx.textAlign = 'center'
             canvasCtx.textBaseline = 'top'
             canvasCtx.fillStyle = '#000000'
-            canvasCtx.fillText(this.computer,window.innerWidth / 4,50)
-            canvasCtx.fillText(this.human,window.innerWidth / 4 + window.innerWidth / 2,50)
-            }
+            canvasCtx.fillText(this.computer,field.w / 4,50)
+            canvasCtx.fillText(this.human,field.w / 4 + field.w / 2,50)
+            },
         }
 
 
@@ -103,14 +112,16 @@
             line.draw()
             leftPaddle.draw()
             rightPaddle.draw()
-            ball.draw()
             score.draw()
-            
+            ball.draw()
             
         }
 
         setup()
         draw()
+
+        window.setInterval(draw, 1000 / 60)
+        
 
     </script>
 </body>
