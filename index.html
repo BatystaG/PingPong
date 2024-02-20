@@ -84,9 +84,22 @@
             y: 200,
             r: 20,
             speed: 5,
+            directionX: 1,
+            directionY: 1,
+            _calcposition: function() {
+                if(this.y > field.h) {
+                    this._reverseY()
+                }
+            }, 
+            _reverseX: function(){
+                this.directionX *= -1
+            },
+            _reverseY: function(){
+                this.directionY *= -1
+            },
             _move: function(){
-                this.x += 1 * this.speed
-                this.y += 1 * this.speed
+                this.x += this.directionX * this.speed
+                this.y += this.directionY * this.speed
             },
             draw: function(){
             canvasCtx.fillStyle = "#000000"
@@ -94,6 +107,7 @@
             canvasCtx.arc(this.x,this.y,this.r,0,2*Math.PI,false)
             canvasCtx.fill()
 
+            this._calcposition()
             this._move()
             },
         }
