@@ -87,6 +87,15 @@
             directionX: 1,
             directionY: 1,
             _calcposition: function() {
+                if (this.x > field.w){
+                    if(this.y + this.r > rightPaddle.y && this.y - this.r < rightPaddle.y + rightPaddle.h)
+                {
+                    this._reverseX()
+                } else {
+                    score.increaseHuman()
+                    this._pointUp()
+                }
+            }
                 // Verifica laterais superior e inferior do campo
                 if(
                     (this.y - this.r < 0 && this.directionY < 0) ||
@@ -101,6 +110,10 @@
             },
             _reverseY: function(){
                 this.directionY *= -1
+            },
+            _pointUp: function(){
+                this.x = field.w / 2
+                this.y = field.h / 2
             },
             _move: function(){
                 this.x += this.directionX * this.speed
@@ -121,6 +134,12 @@
         const score = {
             human: 1,
             computer: 2,
+            increaseHuman: function(){
+                this.human++
+            },
+            increaseComputer: function(){
+                this.computer++
+            },
             draw: function(){
             canvasCtx.font = "bold 72px Arial"
             canvasCtx.textAlign = 'center'
