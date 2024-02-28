@@ -80,14 +80,19 @@
 
         // Criando a Bola
         const ball = {
-            x: 300,
-            y: 200,
+            x: 0,
+            y: 0,
             r: 20,
             speed: 5,
             directionX: 1,
             directionY: 1,
             _calcposition: function() {
-                if(this.y > field.h) {
+                // Verifica laterais superior e inferior do campo
+                if(
+                    (this.y - this.r < 0 && this.directionY < 0) ||
+                    (this.y > field.h - this.r && this.directionY > 0)) {
+
+                    // Rebate a Bola invertendo o sinal do Eixo Y
                     this._reverseY()
                 }
             }, 
