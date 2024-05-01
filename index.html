@@ -80,7 +80,7 @@
 
         // Criando a Bola
         const ball = {
-            x: 0
+            x: 0,
             y: 0,
             r: 20,
             speed: 5,
@@ -95,10 +95,22 @@
                     this._reverseX()
                 } else {
                     // Pontuar jogador 1
-                    score.increaseHuman()
+                    score.increaseComputer()
                     this._pointUp()
                 }
             }
+                // Verifica se o Jogador 2 fez um ponto(x < 0)
+                if(this.x < this.r +leftPaddle.w + gapX){
+                    //Verifica se a raquete esquerda está na posição y da bola
+                    if(this.y + this.r > leftPaddle.y && this.y - this.r < leftPaddle.y + leftPaddle.h){ 
+                        // Rebate a bola invertendo o sinal de x 
+                        this._reverseX()
+                    } else {
+                        score.increaseHuman()
+                        this._pointUp()
+                    }
+                }
+
                 // Verifica laterais superior e inferior do campo
                 if(
                     (this.y - this.r < 0 && this.directionY < 0) ||
@@ -135,8 +147,8 @@
 
         // Criando o Placar
         const score = {
-            human: 1,
-            computer: 2,
+            human: 0,
+            computer: 0,
             increaseHuman: function(){
                 this.human++
             },
