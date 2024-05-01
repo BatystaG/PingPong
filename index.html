@@ -80,18 +80,21 @@
 
         // Criando a Bola
         const ball = {
-            x: 0,
+            x: 0
             y: 0,
             r: 20,
             speed: 5,
             directionX: 1,
             directionY: 1,
             _calcposition: function() {
-                if (this.x > field.w){
+                // Verifica se o jogador 1 fez um ponto (x > Largura do campo)
+                if (this.x > field.w - this.r - rightPaddle.w -gapX){
                     if(this.y + this.r > rightPaddle.y && this.y - this.r < rightPaddle.y + rightPaddle.h)
                 {
+                    // Rebate a bola invertendo o sinal de x
                     this._reverseX()
                 } else {
+                    // Pontuar jogador 1
                     score.increaseHuman()
                     this._pointUp()
                 }
