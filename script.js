@@ -74,7 +74,7 @@
             x: field.w / 2,
             y: field.h / 2,
             r: 20,
-            speed: 3,
+            speed: 5,
             directionX: 1,
             directionY: 1,
             _calcposition: function() {
